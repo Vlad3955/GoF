@@ -28,28 +28,54 @@ namespace MyTools {
 
 	//=============================================================================================
 
-	void ClrScr();
+    class ScreenSingleton
+    {
+    public:
+        static ScreenSingleton& getInstance();
+        void ClrScr();
+        void __fastcall GotoXY(double x, double y);
+        uint16_t GetMaxX();
+        uint16_t GetMaxY();
+        void SetColor(ConsoleColor color);
 
-	void __fastcall GotoXY(double x, double y);
-
-	uint16_t GetMaxX();
-
-	uint16_t GetMaxY();
-
-    void SetColor(ConsoleColor color);
-
-	//=============================================================================================
-
-	void __fastcall OpenLogFile(const std::string& FN);
-
-	void CloseLogFile();
-
-	void __fastcall WriteToLog(const std::string& str);
-
-	void __fastcall WriteToLog(const std::string& str, int n);
-
-	void __fastcall WriteToLog(const std::string& str, double d);
+    private:
+        ScreenSingleton();
+        ScreenSingleton(const ScreenSingleton& root) = delete;
+        ScreenSingleton& operator=(const ScreenSingleton&) = delete;
+    };
 
 	//=============================================================================================
 
+    class FileLoggerSingletone
+    {
+    public:
+        static FileLoggerSingletone& getInstance();
+        void __fastcall OpenLogFile(const std::string& FN);
+        void CloseLogFile();
+        void __fastcall WriteToLog(const std::string& str);
+        void __fastcall WriteToLog(const std::string& str, int n);
+        void __fastcall WriteToLog(const std::string& str, double d);
+    protected:
+        FileLoggerSingletone();
+        FileLoggerSingletone(const FileLoggerSingletone& root) = delete;
+        FileLoggerSingletone& operator=(const FileLoggerSingletone&) = delete;
+    };
+
+	//=============================================================================================
+
+    class LoggerSingleton : public FileLoggerSingletone
+    {
+    public:
+        static LoggerSingleton& getInstance();
+        void __fastcall WriteToLog(const std::string& str);
+        void __fastcall WriteToLog(const std::string& str, int n);
+        void __fastcall WriteToLog(const std::string& str, double d);
+    private:
+        int count;
+        LoggerSingleton();
+        LoggerSingleton(const FileLoggerSingletone& root) = delete;
+        LoggerSingleton& operator=(const FileLoggerSingletone&) = delete;
+    };
+
+    //=============================================================================================
 };
