@@ -51,3 +51,30 @@ private:
     uint16_t bombsNumber, deltaTime, fps;
     int16_t score;
 };
+//====================================================================
+
+// Command
+//====================================================================
+class SbomberCommand
+{
+public:
+    virtual void execute() = 0;
+    virtual ~SbomberCommand();
+protected:
+    SBomber *sbomber;
+    DynamicObject* _pBomb;
+    vector<DynamicObject*> _vec;
+};
+
+class DeleteDynamicObjCommand : public SbomberCommand
+{
+public:
+    DeleteDynamicObjCommand(DynamicObject* pBomb, std::vector<DynamicObject*> &vec);
+    void execute() override;
+    ~DeleteDynamicObjCommand();
+private:
+    
+};
+
+
+//====================================================================

@@ -366,3 +366,42 @@ void SBomber::DropBomb()
         score -= Bomb::BombCost;
     }
 }
+//====================================================================
+
+// Command
+//====================================================================
+SbomberCommand::SbomberCommand()
+{
+}
+
+SbomberCommand::~SbomberCommand()
+{
+}
+
+DeleteDynamicObjCommand::DeleteDynamicObjCommand(DynamicObject* pBomb, std::vector<DynamicObject*>& vec)
+{
+    _pBomb = pBomb;
+    for (vector<DynamicObject*>::iterator i = vec.begin(); i < vec.end(); i++)
+    {
+        _vec.push_back(*i);
+    }
+}
+
+
+void DeleteDynamicObjCommand::execute()
+{
+    auto it = _vec.begin();
+    for (; it != _vec.end(); it++)
+    {
+        if (*it == _pBomb)
+        {
+            _vec.erase(it);
+            break;
+        }
+    }
+}
+
+DeleteDynamicObjCommand::~DeleteDynamicObjCommand()
+{
+}
+//====================================================================
