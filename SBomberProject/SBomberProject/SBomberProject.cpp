@@ -1,4 +1,4 @@
-﻿
+﻿#include <Windows.h>
 #include <conio.h>
 
 #include "SBomber.h"
@@ -27,6 +27,7 @@ int main(void)
         game.DrawFrame();
         game.MoveObjects();
         game.CheckObjects();
+        Sleep(30);
 
         game.TimeFinish();
 
