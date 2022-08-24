@@ -8,6 +8,15 @@
 #include "Ground.h"
 #include "Tank.h"
 
+class SbomberCommand
+{
+public:
+    virtual void execute() = 0;
+    virtual ~SbomberCommand() {};
+protected:
+
+};
+
 class SBomber
 {
 public:
@@ -31,8 +40,10 @@ private:
     void CheckBombsAndGround();
     void __fastcall CheckDestoyableObjects(Bomb* pBomb);
 
-    void __fastcall DeleteDynamicObj(DynamicObject * pBomb);
-    void __fastcall DeleteStaticObj(GameObject* pObj);
+    /*void __fastcall DeleteDynamicObj(DynamicObject * pBomb);
+    void __fastcall DeleteStaticObj(GameObject* pObj);*/
+
+    void CommandExecuter(SbomberCommand* pCommand);
 
     Ground * FindGround() const;
     Plane * FindPlane() const;
@@ -47,6 +58,7 @@ private:
     
     bool exitFlag;
 
+    SbomberCommand* pCommand;
     uint64_t startTime, finishTime, passedTime;
     uint16_t bombsNumber, deltaTime, fps;
     int16_t score;
@@ -55,26 +67,40 @@ private:
 
 // Command
 //====================================================================
-class SbomberCommand
-{
-public:
-    virtual void execute() = 0;
-    virtual ~SbomberCommand();
-protected:
-    SBomber *sbomber;
-    DynamicObject* _pBomb;
-    vector<DynamicObject*> _vec;
-};
-
 class DeleteDynamicObjCommand : public SbomberCommand
 {
 public:
-    DeleteDynamicObjCommand(DynamicObject* pBomb, std::vector<DynamicObject*> &vec);
+    DeleteDynamicObjCommand(DynamicObject* pDynObj, std::vector<DynamicObject*>& vec);
     void execute() override;
     ~DeleteDynamicObjCommand();
 private:
-    
+    DynamicObject* _pDynObj;
+    std::vector<DynamicObject*>& _vec;
 };
 
+class DeleteStaticObjCommand : public SbomberCommand
+{
+public:
+    DeleteStaticObjCommand(GameObject* pObj, std::vector<GameObject*>& vecStatic);
+    void execute() override;
+    ~DeleteStaticObjCommand();
+private:
+    GameObject* _pObj;
+    std::vector<GameObject*>& _vecStatic;
+};
 
+class DropBombCommand : public SbomberCommand
+{
+public:
+    DropBombCommand(const Plane* plane, vector<DynamicObject*>& vec, uint16_t* numBombs);
+    //void setParam(const Plane* plane, uint16_t *numBombs);
+    void execute() override;
+    Plane* FindPlane() const;
+    ~DropBombCommand();
+private:
+    
+    const Plane* _plain;
+    std::vector<DynamicObject*>& _vec;
+    uint16_t *_numBombs;
+};
 //====================================================================

@@ -9,8 +9,14 @@
 #include "Tank.h"
 #include "House.h"
 
+
 using namespace std;
 using namespace MyTools;
+
+// Command
+//====================================================================
+
+
 
 SBomber::SBomber()
     : exitFlag(false),
@@ -132,7 +138,9 @@ void SBomber::CheckBombsAndGround()
         {
             pGround->AddCrater(vecBombs[i]->GetX());
             CheckDestoyableObjects(vecBombs[i]);
-            DeleteDynamicObj(vecBombs[i]);
+            //DeleteDynamicObj(vecBombs[i]);
+            pCommand = new DeleteDynamicObjCommand(vecBombs[i], vecDynamicObj);
+            CommandExecuter(pCommand);
         }
     }
 
@@ -150,36 +158,38 @@ void SBomber::CheckDestoyableObjects(Bomb * pBomb)
         if (vecDestoyableObjects[i]->isInside(x1, x2))
         {
             score += vecDestoyableObjects[i]->GetScore();
-            DeleteStaticObj(vecDestoyableObjects[i]);
+            //DeleteStaticObj(vecDestoyableObjects[i]);
+            pCommand = new DeleteStaticObjCommand(vecDestoyableObjects[i], vecStaticObj);
+            CommandExecuter(pCommand);
         }
     }
 }
 
-void SBomber::DeleteDynamicObj(DynamicObject* pObj)
-{
-    auto it = vecDynamicObj.begin();
-    for (; it != vecDynamicObj.end(); it++)
-    {
-        if (*it == pObj)
-        {
-            vecDynamicObj.erase(it);
-            break;
-        }
-    }
-}
-
-void SBomber::DeleteStaticObj(GameObject* pObj)
-{
-    auto it = vecStaticObj.begin();
-    for (; it != vecStaticObj.end(); it++)
-    {
-        if (*it == pObj)
-        {
-            vecStaticObj.erase(it);
-            break;
-        }
-    }
-}
+//void SBomber::DeleteDynamicObj(DynamicObject* pObj)
+//{
+//    auto it = vecDynamicObj.begin();
+//    for (; it != vecDynamicObj.end(); it++)
+//    {
+//        if (*it == pObj)
+//        {
+//            vecDynamicObj.erase(it);
+//            break;
+//        }
+//    }
+//}
+//
+//void SBomber::DeleteStaticObj(GameObject* pObj)
+//{
+//    auto it = vecStaticObj.begin();
+//    for (; it != vecStaticObj.end(); it++)
+//    {
+//        if (*it == pObj)
+//        {
+//            vecStaticObj.erase(it);
+//            break;
+//        }
+//    }
+//}
 
 vector<DestroyableGroundObject*> SBomber::FindDestoyableGroundObjects() const
 {
@@ -366,25 +376,17 @@ void SBomber::DropBomb()
         score -= Bomb::BombCost;
     }
 }
+
+void SBomber::CommandExecuter(SbomberCommand* pCommand)
+{
+    pCommand->execute();
+}
 //====================================================================
 
-// Command
-//====================================================================
-SbomberCommand::SbomberCommand()
+DeleteDynamicObjCommand::DeleteDynamicObjCommand(DynamicObject* pDynObj, std::vector<DynamicObject*>& vec) :
+    _pDynObj(pDynObj), _vec(vec)
 {
-}
-
-SbomberCommand::~SbomberCommand()
-{
-}
-
-DeleteDynamicObjCommand::DeleteDynamicObjCommand(DynamicObject* pBomb, std::vector<DynamicObject*>& vec)
-{
-    _pBomb = pBomb;
-    for (vector<DynamicObject*>::iterator i = vec.begin(); i < vec.end(); i++)
-    {
-        _vec.push_back(*i);
-    }
+   
 }
 
 
@@ -393,7 +395,7 @@ void DeleteDynamicObjCommand::execute()
     auto it = _vec.begin();
     for (; it != _vec.end(); it++)
     {
-        if (*it == _pBomb)
+        if (*it == _pDynObj)
         {
             _vec.erase(it);
             break;
@@ -403,5 +405,86 @@ void DeleteDynamicObjCommand::execute()
 
 DeleteDynamicObjCommand::~DeleteDynamicObjCommand()
 {
+   
 }
+
+
 //====================================================================
+DeleteStaticObjCommand::DeleteStaticObjCommand(GameObject* pObj, std::vector<GameObject*>& vecStatic) :
+    _pObj(pObj), _vecStatic(vecStatic)
+{
+   
+}
+
+
+void DeleteStaticObjCommand::execute()
+{
+    auto it = _vecStatic.begin();
+    for (; it != _vecStatic.end(); it++)
+    {
+        if (*it == _pObj)
+        {
+            _vecStatic.erase(it);
+            break;
+        }
+    }
+}
+
+DeleteStaticObjCommand::~DeleteStaticObjCommand()
+{
+}
+
+
+//====================================================================
+
+DropBombCommand::DropBombCommand(const Plane* plane, vector<DynamicObject*>& vec, uint16_t* numBombs) :
+    _plain(plain), _vec(vec), _numBombs(numBombs)
+{
+    
+}
+
+//void DropBombCommand::setParam(const Plane* plane, uint16_t* numBombs)
+//{
+//    _plain = plain;
+//    _numBombs = numBombs;
+//}
+
+Plane* DropBombCommand::FindPlane() const
+{
+    for (size_t i = 0; i < _vec.size(); i++)
+    {
+        Plane* p = dynamic_cast<Plane*>(_vec[i]);
+        if (p != nullptr)
+        {
+            return p;
+        }
+    }
+
+    return nullptr;
+}
+
+void DropBombCommand::execute()
+{
+    if (_numBombs > 0)
+    {
+        WriteToLog(string(__FUNCTION__) + " was invoked");
+
+        Plane* pPlane = FindPlane();
+        double x = pPlane->GetX() + 4;
+        double y = pPlane->GetY() + 2;
+
+        Bomb* pBomb = new Bomb;
+        pBomb->SetDirection(0.3, 1);
+        pBomb->SetSpeed(2);
+        pBomb->SetPos(x, y);
+        pBomb->SetWidth(SMALL_CRATER_SIZE);
+
+        vecDynamicObj.push_back(pBomb);
+        bombsNumber--;
+        score -= Bomb::BombCost;
+    }
+}
+
+DropBombCommand::~DropBombCommand()
+{
+}
