@@ -14,7 +14,7 @@ public:
     virtual void execute() = 0;
     virtual ~SbomberCommand() {};
 protected:
-
+    
 };
 
 class SBomber
@@ -51,7 +51,7 @@ private:
     std::vector<DestroyableGroundObject*> FindDestoyableGroundObjects() const;
     std::vector<Bomb*> FindAllBombs() const;
 
-    void DropBomb();
+    //void DropBomb();
 
     std::vector<DynamicObject*> vecDynamicObj;
     std::vector<GameObject*> vecStaticObj;
@@ -92,15 +92,26 @@ private:
 class DropBombCommand : public SbomberCommand
 {
 public:
-    DropBombCommand(const Plane* plane, vector<DynamicObject*>& vec, uint16_t* numBombs);
-    //void setParam(const Plane* plane, uint16_t *numBombs);
+    DropBombCommand(const Plane* plane, std::vector<DynamicObject*>& vec, uint16_t* numBombs, int16_t* score);
     void execute() override;
-    Plane* FindPlane() const;
     ~DropBombCommand();
 private:
-    
-    const Plane* _plain;
+    const Plane* _plane;
     std::vector<DynamicObject*>& _vec;
     uint16_t *_numBombs;
+    int16_t *_score;
+};
+
+class DropBombDecoratorCommand : public SbomberCommand
+{
+public:
+    DropBombDecoratorCommand(const Plane* plane, std::vector<DynamicObject*>& vec, uint16_t* numBombs, int16_t* score);
+    void execute() override;
+    ~DropBombDecoratorCommand();
+private:
+    const Plane* _plane;
+    std::vector<DynamicObject*>& _vec;
+    uint16_t* _numBombs;
+    int16_t* _score;
 };
 //====================================================================

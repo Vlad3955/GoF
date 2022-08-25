@@ -302,11 +302,15 @@ void SBomber::ProcessKBHit()
         break;
 
     case 'b':
-        DropBomb();
+        //DropBomb();
+        pCommand = new DropBombDecoratorCommand(FindPlane(), vecDynamicObj, &bombsNumber, &score);
+        CommandExecuter(pCommand);
         break;
 
     case 'B':
-        DropBomb();
+        //DropBomb();
+        pCommand = new DropBombDecoratorCommand(FindPlane(), vecDynamicObj, &bombsNumber, &score);
+        CommandExecuter(pCommand);
         break;
 
     default:
@@ -355,27 +359,27 @@ void SBomber::TimeFinish()
     WriteToLog(string(__FUNCTION__) + " deltaTime = ", (int)deltaTime);
 }
 
-void SBomber::DropBomb()
-{
-    if (bombsNumber > 0)
-    {
-        WriteToLog(string(__FUNCTION__) + " was invoked");
-
-        Plane* pPlane = FindPlane();
-        double x = pPlane->GetX() + 4;
-        double y = pPlane->GetY() + 2;
-
-        Bomb* pBomb = new Bomb;
-        pBomb->SetDirection(0.3, 1);
-        pBomb->SetSpeed(2);
-        pBomb->SetPos(x, y);
-        pBomb->SetWidth(SMALL_CRATER_SIZE);
-
-        vecDynamicObj.push_back(pBomb);
-        bombsNumber--;
-        score -= Bomb::BombCost;
-    }
-}
+//void SBomber::DropBomb()
+//{
+//    if (bombsNumber > 0)
+//    {
+//        WriteToLog(string(__FUNCTION__) + " was invoked");
+//
+//        Plane* pPlane = FindPlane();
+//        double x = pPlane->GetX() + 4;
+//        double y = pPlane->GetY() + 2;
+//
+//        Bomb* pBomb = new Bomb;
+//        pBomb->SetDirection(0.3, 1);
+//        pBomb->SetSpeed(2);
+//        pBomb->SetPos(x, y);
+//        pBomb->SetWidth(SMALL_CRATER_SIZE);
+//
+//        vecDynamicObj.push_back(pBomb);
+//        bombsNumber--;
+//        score -= Bomb::BombCost;
+//    }
+//}
 
 void SBomber::CommandExecuter(SbomberCommand* pCommand)
 {
@@ -383,6 +387,8 @@ void SBomber::CommandExecuter(SbomberCommand* pCommand)
 }
 //====================================================================
 
+// DeleteDynamicObjCommand
+//====================================================================
 DeleteDynamicObjCommand::DeleteDynamicObjCommand(DynamicObject* pDynObj, std::vector<DynamicObject*>& vec) :
     _pDynObj(pDynObj), _vec(vec)
 {
@@ -407,8 +413,10 @@ DeleteDynamicObjCommand::~DeleteDynamicObjCommand()
 {
    
 }
+//====================================================================
 
 
+// DeleteStaticObjCommand
 //====================================================================
 DeleteStaticObjCommand::DeleteStaticObjCommand(GameObject* pObj, std::vector<GameObject*>& vecStatic) :
     _pObj(pObj), _vecStatic(vecStatic)
@@ -433,45 +441,26 @@ void DeleteStaticObjCommand::execute()
 DeleteStaticObjCommand::~DeleteStaticObjCommand()
 {
 }
-
-
 //====================================================================
 
-DropBombCommand::DropBombCommand(const Plane* plane, vector<DynamicObject*>& vec, uint16_t* numBombs) :
-    _plain(plain), _vec(vec), _numBombs(numBombs)
+
+// DropBombCommand
+//====================================================================
+DropBombCommand::DropBombCommand(const Plane* plane, vector<DynamicObject*>& vec, uint16_t* numBombs, int16_t* score) :
+    _plane(plane), _vec(vec), _numBombs(numBombs), _score(score)
 {
     
 }
 
-//void DropBombCommand::setParam(const Plane* plane, uint16_t* numBombs)
-//{
-//    _plain = plain;
-//    _numBombs = numBombs;
-//}
-
-Plane* DropBombCommand::FindPlane() const
-{
-    for (size_t i = 0; i < _vec.size(); i++)
-    {
-        Plane* p = dynamic_cast<Plane*>(_vec[i]);
-        if (p != nullptr)
-        {
-            return p;
-        }
-    }
-
-    return nullptr;
-}
 
 void DropBombCommand::execute()
 {
-    if (_numBombs > 0)
+    if ((*_numBombs) > 0)
     {
         WriteToLog(string(__FUNCTION__) + " was invoked");
 
-        Plane* pPlane = FindPlane();
-        double x = pPlane->GetX() + 4;
-        double y = pPlane->GetY() + 2;
+        double x = _plane->GetX() + 4;
+        double y = _plane->GetY() + 2;
 
         Bomb* pBomb = new Bomb;
         pBomb->SetDirection(0.3, 1);
@@ -479,12 +468,49 @@ void DropBombCommand::execute()
         pBomb->SetPos(x, y);
         pBomb->SetWidth(SMALL_CRATER_SIZE);
 
-        vecDynamicObj.push_back(pBomb);
-        bombsNumber--;
-        score -= Bomb::BombCost;
+        _vec.push_back(pBomb);
+        (*_numBombs)--;
+        _score -= Bomb::BombCost;
     }
 }
 
 DropBombCommand::~DropBombCommand()
 {
 }
+//====================================================================
+
+
+// DropBombDecoratorCommand
+//====================================================================
+DropBombDecoratorCommand::DropBombDecoratorCommand(const Plane* plane, vector<DynamicObject*>& vec, uint16_t* numBombs, int16_t* score) :
+    _plane(plane), _vec(vec), _numBombs(numBombs), _score(score)
+{
+
+}
+
+
+void DropBombDecoratorCommand::execute()
+{
+    if ((*_numBombs) > 0)
+    {
+        WriteToLog(string(__FUNCTION__) + " was invoked");
+
+        double x = _plane->GetX() + 4;
+        double y = _plane->GetY() + 2;
+
+        BombDecorator* pBomb = new BombDecorator;
+        pBomb->SetDirection(0.3, 1);
+        pBomb->SetSpeed(2);
+        pBomb->SetPos(x, y);
+        pBomb->SetWidth(SMALL_CRATER_SIZE);
+
+        _vec.push_back(pBomb);
+        (*_numBombs)--;
+        _score -= Bomb::BombCost;
+    }
+}
+
+DropBombDecoratorCommand::~DropBombDecoratorCommand()
+{
+}
+//====================================================================
