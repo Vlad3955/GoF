@@ -22,38 +22,38 @@ BombDecorator::BombDecorator()
 
 void BombDecorator::Move(uint16_t time)
 {
-	_bomb->Move(time * 1.6);
+	_bomb.Move(time * 1.6);
 }
 void BombDecorator::Draw() const
 {
-	_bomb->Draw();
-	GotoXY(_bomb->GetX(), _bomb->GetY() - 1);
+	_bomb.Draw();
+	GotoXY(_bomb.GetX(), _bomb.GetY() - 1);
 	cout << "|";
 }
 
-void BombDecorator::SetPos(double nx, double ny) 
+inline void BombDecorator::SetPos(double nx, double ny)
 {
-	_bomb->SetPos(nx, ny);
+	_bomb.SetPos(nx, ny);
 	//x = nx; y = ny; 
 }
 
-double BombDecorator::GetY() const
+inline double BombDecorator::GetY() const
 { 
-	return _bomb->GetY(); 
+	return _bomb.GetY(); 
 }
-double BombDecorator::GetX() const 
+inline double BombDecorator::GetX() const
 { 
-	return _bomb->GetX(); 
+	return _bomb.GetX(); 
 }
 
-void BombDecorator::SetWidth(uint16_t widthN) 
+inline void BombDecorator::SetWidth(uint16_t widthN)
 { 
-	_bomb->SetWidth(widthN);
+	_bomb.SetWidth(widthN);
 	//width = widthN; 
 }
-uint16_t BombDecorator::GetWidth() const 
+inline uint16_t BombDecorator::GetWidth() const
 { 
-	return _bomb->GetWidth(); 
+	return _bomb.GetWidth(); 
 }
 
 BombDecorator::~BombDecorator()

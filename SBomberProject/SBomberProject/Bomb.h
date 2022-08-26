@@ -21,18 +21,18 @@ class BombDecorator : public DynamicObject
 {
 public:
 	BombDecorator();
-	void Move(uint16_t time) override;
+	void Move(uint16_t time);
 	void Draw() const override;
-	void SetPos(double nx, double ny);
+	inline void SetPos(double nx, double ny);
 
-	double GetY() const;
-	double GetX() const;
+	inline double GetY() const;
+	inline double GetX() const;
 
-	void SetWidth(uint16_t widthN);
-	uint16_t GetWidth() const;
+	inline void SetWidth(uint16_t widthN);
+	inline uint16_t GetWidth() const;
 	~BombDecorator();
 private:
-	Bomb* _bomb;
+	Bomb _bomb;
 };
 //====================================================
 

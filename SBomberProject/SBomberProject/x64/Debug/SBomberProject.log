@@ -1,3 +1,2 @@
-﻿  Bomb.cpp
-D:\C++\CPP\GoF\SBomberProject\SBomberProject\Bomb.cpp(25,19): warning C4244: аргумент: преобразование "double" в "uint16_t", возможна потеря данных
-  SBomberProject.vcxproj -> D:\C++\CPP\GoF\SBomberProject\x64\Debug\SBomberProject.exe
+﻿  SBomberProject.cpp
+  SBomberProject.vcxproj -> D:\GB\CPP\GoF\SBomberProject\x64\Debug\SBomberProject.exe
