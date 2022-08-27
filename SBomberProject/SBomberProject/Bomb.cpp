@@ -34,7 +34,6 @@ void BombDecorator::Draw() const
 inline void BombDecorator::SetPos(double nx, double ny)
 {
 	_bomb.SetPos(nx, ny);
-	//x = nx; y = ny; 
 }
 
 inline double BombDecorator::GetY() const
@@ -49,7 +48,6 @@ inline double BombDecorator::GetX() const
 inline void BombDecorator::SetWidth(uint16_t widthN)
 { 
 	_bomb.SetWidth(widthN);
-	//width = widthN; 
 }
 inline uint16_t BombDecorator::GetWidth() const
 { 

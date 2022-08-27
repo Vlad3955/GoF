@@ -40,9 +40,6 @@ private:
     void CheckBombsAndGround();
     void __fastcall CheckDestoyableObjects(Bomb* pBomb);
 
-    /*void __fastcall DeleteDynamicObj(DynamicObject * pBomb);
-    void __fastcall DeleteStaticObj(GameObject* pObj);*/
-
     void CommandExecuter(SbomberCommand* pCommand);
 
     Ground * FindGround() const;
@@ -50,8 +47,6 @@ private:
     LevelGUI * FindLevelGUI() const;
     std::vector<DestroyableGroundObject*> FindDestoyableGroundObjects() const;
     std::vector<Bomb*> FindAllBombs() const;
-
-    //void DropBomb();
 
     std::vector<DynamicObject*> vecDynamicObj;
     std::vector<GameObject*> vecStaticObj;
