@@ -8,6 +8,7 @@
 #include "Ground.h"
 #include "Tank.h"
 #include "House.h"
+#include "BombIterator.h"
 
 using namespace std;
 using namespace MyTools;
@@ -121,9 +122,24 @@ void SBomber::CheckPlaneAndLevelGUI()
     }
 }
 
+BombIterator SBomber::begin()
+{
+    BombIterator it(vecDynamicObj);
+    return it;
+}
+// итератор в конечном состоянии
+BombIterator SBomber::end()
+{
+    BombIterator it(vecDynamicObj);
+    it.reset();
+    return it;
+}
+
 void SBomber::CheckBombsAndGround() 
 {
-    vector<Bomb*> vecBombs = FindAllBombs();
+    /*vector<Bomb*> vecBombs = FindAllBombs();*/
+   // vector<Bomb*> vecBombs;
+    BombIterator it
     Ground* pGround = FindGround();
     const double y = pGround->GetY();
     for (size_t i = 0; i < vecBombs.size(); i++)
@@ -222,21 +238,21 @@ Ground* SBomber::FindGround() const
     return nullptr;
 }
 
-vector<Bomb*> SBomber::FindAllBombs() const
-{
-    vector<Bomb*> vecBombs;
-
-    for (size_t i = 0; i < vecDynamicObj.size(); i++)
-    {
-        Bomb* pBomb = dynamic_cast<Bomb*>(vecDynamicObj[i]);
-        if (pBomb != nullptr)
-        {
-            vecBombs.push_back(pBomb);
-        }
-    }
-
-    return vecBombs;
-}
+//vector<Bomb*> SBomber::FindAllBombs() const
+//{
+//    vector<Bomb*> vecBombs;
+//
+//    for (size_t i = 0; i < vecDynamicObj.size(); i++)
+//    {
+//        Bomb* pBomb = dynamic_cast<Bomb*>(vecDynamicObj[i]);
+//        if (pBomb != nullptr)
+//        {
+//            vecBombs.push_back(pBomb);
+//        }
+//    }
+//
+//    return vecBombs;
+//}
 
 Plane* SBomber::FindPlane() const
 {
@@ -366,3 +382,5 @@ void SBomber::DropBomb()
         score -= Bomb::BombCost;
     }
 }
+
+

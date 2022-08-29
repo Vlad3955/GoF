@@ -1,1 +1,18 @@
-﻿
+﻿  Bomb.cpp
+  BombIterator.cpp
+D:\C++\CPP\GoF\SBomberProject\SBomberProject\BombIterator.cpp(37,31): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  Ground.cpp
+  House.cpp
+  LevelGUI.cpp
+  MyTools.cpp
+  Plane.cpp
+  SBomber.cpp
+D:\C++\CPP\GoF\SBomberProject\SBomberProject\SBomber.cpp(142,45): error C2440: инициализация: невозможно преобразовать "std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>" в "BombIterator *"
+          with
+          [
+              _Ty=DynamicObject *
+          ]
+D:\C++\CPP\GoF\SBomberProject\SBomberProject\SBomber.cpp(142,22): message : Для выполнения данного преобразования нет доступного оператора преобразования, определенного пользователем, или вызов оператора невозможен
+  SBomberProject.cpp
+  Tank.cpp
+  Создание кода...
