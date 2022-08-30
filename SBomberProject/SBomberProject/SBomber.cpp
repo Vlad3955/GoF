@@ -122,7 +122,7 @@ void SBomber::CheckPlaneAndLevelGUI()
     }
 }
 
-BombIterator SBomber::begin()
+BombIterator SBomber::begin() 
 {
     BombIterator it(vecDynamicObj);
     return it;
@@ -137,9 +137,7 @@ BombIterator SBomber::end()
 
 void SBomber::CheckBombsAndGround() 
 {
-    /*vector<Bomb*> vecBombs = FindAllBombs();*/
-   // vector<Bomb*> vecBombs;
-    BombIterator it
+    vector<Bomb*> vecBombs = FindAllBombs();
     Ground* pGround = FindGround();
     const double y = pGround->GetY();
     for (size_t i = 0; i < vecBombs.size(); i++)
@@ -152,6 +150,19 @@ void SBomber::CheckBombsAndGround()
         }
     }
 
+    //BombIterator it = begin();
+    //Ground* pGround = FindGround();
+    //const double y = pGround->GetY();
+    //for (;it != end(); ++it)
+    //{
+    //    if (it.getBomb()->GetY >= y) // Пересечение бомбы с землей
+    //    {
+    //        pGround->AddCrater(it.getBomb()->GetX());
+    //        CheckDestoyableObjects(it.getBomb()); 
+    //        //DeleteDynamicObj(it.getBomb());
+    //        vecDynamicObj.erase(it);
+    //    }
+    //}
 }
 
 void SBomber::CheckDestoyableObjects(Bomb * pBomb)
@@ -238,21 +249,27 @@ Ground* SBomber::FindGround() const
     return nullptr;
 }
 
-//vector<Bomb*> SBomber::FindAllBombs() const
-//{
-//    vector<Bomb*> vecBombs;
-//
-//    for (size_t i = 0; i < vecDynamicObj.size(); i++)
-//    {
-//        Bomb* pBomb = dynamic_cast<Bomb*>(vecDynamicObj[i]);
-//        if (pBomb != nullptr)
-//        {
-//            vecBombs.push_back(pBomb);
-//        }
-//    }
-//
-//    return vecBombs;
-//}
+vector<Bomb*> SBomber::FindAllBombs() 
+{
+    vector<Bomb*> vecBombs;
+
+    /*for (size_t i = 0; i < vecDynamicObj.size(); i++)
+    {
+        Bomb* pBomb = dynamic_cast<Bomb*>(vecDynamicObj[i]);
+        if (pBomb != nullptr)
+        {
+            vecBombs.push_back(pBomb);
+        }
+    }*/
+
+    BombIterator it = begin();
+    for (;it != end(); ++it)
+    {
+        vecBombs.push_back(dynamic_cast<Bomb*>(*it));
+    }
+
+    return vecBombs;
+}
 
 Plane* SBomber::FindPlane() const
 {

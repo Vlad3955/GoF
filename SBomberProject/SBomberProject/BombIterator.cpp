@@ -17,9 +17,11 @@ BombIterator& BombIterator::operator++ () // префиксный инкремент
 		curIndex = 0;
 	for (; curIndex < refArr.size(); curIndex++)
 	{
-		if (refArr[curIndex] != nullptr)
+		Bomb* pBomb = dynamic_cast<Bomb*>(refArr[curIndex]);
+		if (pBomb != nullptr)
 		{
-			ptr = dynamic_cast<Bomb*>(refArr[curIndex]);
+			ptr = refArr[curIndex];
+			break;
 		}
 	}
 	if (curIndex == refArr.size())
@@ -36,10 +38,12 @@ BombIterator& BombIterator::operator-- () // префексный декремент
 		curIndex = refArr.size() - 1;
 	for (; curIndex >= 0; curIndex--)
 	{
-		if (ptr != nullptr)
+		Bomb* pBomb = dynamic_cast<Bomb*>(refArr[curIndex]);
+		if (pBomb != nullptr)
 		{
-			ptr = dynamic_cast<Bomb*>(refArr[curIndex]);
-		}	
+			ptr = refArr[curIndex];
+			break;
+		}
 	}
 	if (curIndex == -1)
 	{
@@ -47,6 +51,7 @@ BombIterator& BombIterator::operator-- () // префексный декремент
 	}
 	return *this;
 }
+
 
 DynamicObject* BombIterator::operator*() // операция разыменования итератора
 {

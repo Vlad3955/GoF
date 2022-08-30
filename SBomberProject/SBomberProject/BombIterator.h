@@ -8,7 +8,8 @@ using namespace std;
 class BombIterator { // «Итератор» по четным числам в массиве
 	vector<DynamicObject*>& refArr;
 	int curIndex;
-	Bomb* ptr;
+	//Bomb* ptr;
+	DynamicObject* ptr;
 public:
 	BombIterator(vector<DynamicObject*>& ref);
 	void reset();
