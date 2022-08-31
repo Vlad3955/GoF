@@ -8,11 +8,11 @@
 #include "Ground.h"
 #include "Tank.h"
 #include "BombIterator.h"
+#include "TankAdapter.h"
 
 class SBomber
 {
 public:
-    friend class BombIterator;
     SBomber();
     ~SBomber();
     
@@ -25,9 +25,6 @@ public:
     void DrawFrame();
     void MoveObjects();
     void CheckObjects();
-
-    BombIterator begin();
-    BombIterator end();
 
 private:
 
@@ -42,7 +39,7 @@ private:
     Plane * FindPlane() const;
     LevelGUI * FindLevelGUI() const;
     std::vector<DestroyableGroundObject*> FindDestoyableGroundObjects() const;
-    std::vector<Bomb*> FindAllBombs();
+    std::vector<Bomb*> FindAllBombs() const;
 
     void DropBomb();
 
@@ -51,7 +48,8 @@ private:
     
     bool exitFlag;
 
-   
+    BombIterator begin() const;
+    BombIterator end() const;
     
     uint64_t startTime, finishTime, passedTime;
     uint16_t bombsNumber, deltaTime, fps;

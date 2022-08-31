@@ -1,6 +1,6 @@
 #include "BombIterator.h"
 
-BombIterator::BombIterator(vector<DynamicObject*>& ref) : refArr(ref), curIndex(-1), ptr(nullptr)
+BombIterator::BombIterator(const vector<DynamicObject*>& ref) : refArr(ref), curIndex(-1), ptr(nullptr)
 {
 	++(*this);
 }

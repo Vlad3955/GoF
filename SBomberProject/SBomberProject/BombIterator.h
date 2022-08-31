@@ -6,12 +6,11 @@
 using namespace std;
 
 class BombIterator { // «Итератор» по четным числам в массиве
-	vector<DynamicObject*>& refArr;
+	const vector<DynamicObject*>& refArr;
 	int curIndex;
-	//Bomb* ptr;
 	DynamicObject* ptr;
 public:
-	BombIterator(vector<DynamicObject*>& ref);
+	BombIterator(const vector<DynamicObject*>& ref);
 	void reset();
 	BombIterator& operator++ (); // префиксный инкремент
 	BombIterator& operator-- (); // префексный декремент

@@ -1,6 +1,5 @@
-﻿  BombIterator.cpp
-D:\GB\CPP\GoF\SBomberProject\SBomberProject\BombIterator.cpp(38,31): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
-  SBomber.cpp
+﻿  SBomber.cpp
   SBomberProject.cpp
+  TankAdapter.cpp
   Создание кода...
   SBomberProject.vcxproj -> D:\GB\CPP\GoF\SBomberProject\x64\Debug\SBomberProject.exe
