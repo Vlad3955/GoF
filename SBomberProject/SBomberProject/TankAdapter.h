@@ -11,15 +11,15 @@ public:
 
 	uint16_t GetScore() const override;
 
-	void Draw() const override ;
+	virtual void Draw() const override ;
 
-	void SetPos(double nx, double ny);
+	virtual void SetPos(double nx, double ny) override;
 
-	double GetY() const;
-	double GetX() const;
+	virtual double GetY() const override;
+	virtual double GetX() const override;
 
-	void SetWidth(uint16_t widthN);
-	uint16_t GetWidth() const;
+	virtual void SetWidth(uint16_t widthN) override;
+	virtual uint16_t GetWidth() const override;
 private:
 	mutable TankAdaptee tank;
 	const uint16_t score = 30;
