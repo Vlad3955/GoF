@@ -9,6 +9,8 @@
 #include "Tank.h"
 #include "House.h"
 
+
+
 using namespace std;
 using namespace MyTools;
 
@@ -48,12 +50,12 @@ SBomber::SBomber()
     pGr->SetWidth(width - 2);
     vecStaticObj.push_back(pGr);
 
-    Tank* pTank = new Tank;
+    TankAdapter* pTank = new TankAdapter;
     pTank->SetWidth(13);
     pTank->SetPos(30, groundY - 1);
     vecStaticObj.push_back(pTank);
 
-    pTank = new Tank;
+    pTank = new TankAdapter;
     pTank->SetWidth(13);
     pTank->SetPos(50, groundY - 1);
     vecStaticObj.push_back(pTank);
@@ -121,6 +123,19 @@ void SBomber::CheckPlaneAndLevelGUI()
     }
 }
 
+BombIterator SBomber::begin() const
+{
+    BombIterator it(vecDynamicObj);
+    return it;
+}
+// итератор в конечном состоянии
+BombIterator SBomber::end() const
+{
+    BombIterator it(vecDynamicObj);
+    it.reset();
+    return it;
+}
+
 void SBomber::CheckBombsAndGround() 
 {
     vector<Bomb*> vecBombs = FindAllBombs();
@@ -135,7 +150,6 @@ void SBomber::CheckBombsAndGround()
             DeleteDynamicObj(vecBombs[i]);
         }
     }
-
 }
 
 void SBomber::CheckDestoyableObjects(Bomb * pBomb)
@@ -184,11 +198,11 @@ void SBomber::DeleteStaticObj(GameObject* pObj)
 vector<DestroyableGroundObject*> SBomber::FindDestoyableGroundObjects() const
 {
     vector<DestroyableGroundObject*> vec;
-    Tank* pTank;
+    TankAdapter* pTank;
     House* pHouse;
     for (size_t i = 0; i < vecStaticObj.size(); i++)
     {
-        pTank = dynamic_cast<Tank*>(vecStaticObj[i]);
+        pTank = dynamic_cast<TankAdapter*>(vecStaticObj[i]);
         if (pTank != nullptr)
         {
             vec.push_back(pTank);
@@ -226,13 +240,10 @@ vector<Bomb*> SBomber::FindAllBombs() const
 {
     vector<Bomb*> vecBombs;
 
-    for (size_t i = 0; i < vecDynamicObj.size(); i++)
+    BombIterator it = begin();
+    for (;it != end(); ++it)
     {
-        Bomb* pBomb = dynamic_cast<Bomb*>(vecDynamicObj[i]);
-        if (pBomb != nullptr)
-        {
-            vecBombs.push_back(pBomb);
-        }
+        vecBombs.push_back(dynamic_cast<Bomb*>(*it));
     }
 
     return vecBombs;
@@ -366,3 +377,5 @@ void SBomber::DropBomb()
         score -= Bomb::BombCost;
     }
 }
+
+

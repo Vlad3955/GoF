@@ -7,11 +7,12 @@
 #include "Bomb.h"
 #include "Ground.h"
 #include "Tank.h"
+#include "BombIterator.h"
+#include "TankAdapter.h"
 
 class SBomber
 {
 public:
-
     SBomber();
     ~SBomber();
     
@@ -47,6 +48,9 @@ private:
     
     bool exitFlag;
 
+    BombIterator begin() const;
+    BombIterator end() const;
+    
     uint64_t startTime, finishTime, passedTime;
     uint16_t bombsNumber, deltaTime, fps;
     int16_t score;
