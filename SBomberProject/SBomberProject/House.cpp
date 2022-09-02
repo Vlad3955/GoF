@@ -32,7 +32,7 @@ bool House::isInside(double x1, double x2) const
 
 void House::Draw() const
 {
-	MyTools::SetColor(CC_Yellow);
+	/*MyTools::SetColor(CC_Yellow);
 	GotoXY(x, y - 5);
 	cout << "  ########  ";
 	GotoXY(x, y - 4);
@@ -44,5 +44,41 @@ void House::Draw() const
 	GotoXY(x, y - 1);
 	cout << "#          #";
 	GotoXY(x, y);
-	cout << "############";
+	cout << "############";*/
+
+	
+	MyTools::SetColor(CC_Yellow);
+	int v = 6;
+	GotoXY(x, y - v--);
+
+	/*char look[7][14] = {
+		{""},
+		{"  ########  "},
+		{"##        ##"},
+		{"############"},
+		{"#          #"},
+		{"#          #"},
+		{"############"}
+	};*/
+
+	char look[7][14];
+	HouseBuilderA* a = new HouseBuilderA;
+
+	for (int i = 0; i < 7; i++)
+	{
+		for (int j = 0; j < 14; j++)
+		{
+			look[i][j] = a->GetResult()[i];
+		}
+	}
+	
+	
+	for (int i = 0; i < 7; i++)
+	{
+		for (int j = 0; j < 14; j++)
+		{
+			cout << look[i][j];
+		}
+		GotoXY(x, y - v--);
+	}
 }
