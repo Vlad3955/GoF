@@ -1,64 +1,54 @@
 #include "HouseBuilderA.h"
+#include <cstring>
+
 
 HouseBuilderA::HouseBuilderA()
 {
-}
-
-char HouseBuilderA::buildChimney()
-{
-	char ch[14] = "";
-	return ch[14];
-}
-
-char HouseBuilderA::buildFloorCeil()
-{
-	char ch[14] = "############";
-	return ch[14];
-}
-
-char HouseBuilderA::buildWalls()
-{
-	char ch[14] = "#          #";
-	return ch[14];
-}
-
-
-char HouseBuilderA::buildRoofl1()
-{
-	char ch[14] = "##        ##";
-	return ch[14];
-}
-
-char HouseBuilderA::buildRoofl2()
-{
-	char ch[14] = "  ########  ";
-	return ch[14];
-}
-
-char* HouseBuilderA::GetResult()
-{
-	char bhLook[7][14] = {
-		{buildChimney()},
-		{buildRoofl2()},
-		{buildRoofl1()},
-		{buildFloorCeil()},
-		{buildWalls()},
-		{buildWalls()},
-		{buildFloorCeil()}
-	};
-
-	/*for (int i = 0; i < 7; i++)
-	{
-		for (int j = 0; j < 14; j++)
-		{
-			pHouse->look[i][j] = bhLook[i][j];
-		}
-	}*/
-
 	
-
-	return *bhLook;
 }
+
+void HouseBuilderA::buildChimney()
+{
+	strcpy_s(pHouse->look[0], "");
+}
+
+void HouseBuilderA::buildRoofl2()
+{
+	strcpy_s(pHouse->look[1], "  ########  ");
+}
+
+void HouseBuilderA::buildRoofl1()
+{
+	strcpy_s(pHouse->look[2], "##        ##");
+}
+
+void HouseBuilderA::buildCeil()
+{
+	strcpy_s(pHouse->look[3], "############");
+}
+
+void HouseBuilderA::buildWall1()
+{
+	strcpy_s(pHouse->look[4], "#          #");
+}
+
+void HouseBuilderA::buildWall2()
+{
+	strcpy_s(pHouse->look[5], "#          #");
+}
+
+char HouseBuilderA::buildFloor()
+{
+	return strcpy_s(pHouse->look[6], "############");
+}
+
+
+
+
+
+
+
+
 
 HouseBuilderA::~HouseBuilderA()
 {

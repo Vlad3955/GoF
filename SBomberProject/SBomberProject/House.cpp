@@ -50,7 +50,7 @@ void House::Draw() const
 	MyTools::SetColor(CC_Yellow);
 	int v = 6;
 	GotoXY(x, y - v--);
-
+	
 	/*char look[7][14] = {
 		{""},
 		{"  ########  "},
@@ -61,18 +61,8 @@ void House::Draw() const
 		{"############"}
 	};*/
 
-	char look[7][14];
-	HouseBuilderA* a = new HouseBuilderA;
+	
 
-	for (int i = 0; i < 7; i++)
-	{
-		for (int j = 0; j < 14; j++)
-		{
-			look[i][j] = a->GetResult()[i];
-		}
-	}
-	
-	
 	for (int i = 0; i < 7; i++)
 	{
 		for (int j = 0; j < 14; j++)

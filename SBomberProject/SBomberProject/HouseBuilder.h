@@ -1,14 +1,16 @@
 #pragma once
 #include <iostream>
+#include <stdint.h>
+#include "House.h"
 
 class HouseBuilder
 {
 public:
-	virtual char buildFloorCeil() = 0;
-	virtual char buildWalls() = 0;
-	virtual char buildRoofl1() = 0;
-	//virtual ~HouseBuilder();
-private:
-
+	virtual char buildFloor() = 0;
+	virtual void buildWall1() = 0;
+	virtual void buildRoofl1() = 0;
+	virtual ~HouseBuilder() {};
+protected:
+	House* pHouse = nullptr;
 };
 
