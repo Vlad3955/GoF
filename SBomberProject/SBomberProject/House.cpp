@@ -7,6 +7,8 @@
 using namespace std;
 using namespace MyTools;
 
+char House::look[7][14];
+
 bool House::isInside(double x1, double x2) const
 {
 	const double XBeg = x + 2;

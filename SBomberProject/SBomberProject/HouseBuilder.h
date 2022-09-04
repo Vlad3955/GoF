@@ -6,7 +6,7 @@
 class HouseBuilder
 {
 public:
-	virtual char buildFloor() = 0;
+	virtual void buildFloor() = 0;
 	virtual void buildWall1() = 0;
 	virtual void buildRoofl1() = 0;
 	virtual ~HouseBuilder() {};

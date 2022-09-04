@@ -8,7 +8,7 @@ class HouseBuilderA : public HouseBuilder
 {
 public:
 	HouseBuilderA();
-	char buildFloor() override;
+	void buildFloor() override;
 	void buildWall1() override;
 	void buildRoofl1() override;
 	void buildCeil();

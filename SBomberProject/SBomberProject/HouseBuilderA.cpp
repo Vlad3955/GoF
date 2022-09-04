@@ -37,9 +37,9 @@ void HouseBuilderA::buildWall2()
 	strcpy_s(pHouse->look[5], "#          #");
 }
 
-char HouseBuilderA::buildFloor()
+void HouseBuilderA::buildFloor()
 {
-	return strcpy_s(pHouse->look[6], "############");
+	strcpy_s(pHouse->look[6], "############");
 }
 
 
