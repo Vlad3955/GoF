@@ -9,7 +9,7 @@ HouseBuilderA::HouseBuilderA()
 
 void HouseBuilderA::buildChimney()
 {
-	strcpy_s(pHouse->look[0], "");
+	strcpy_s(pHouse->look[0], "  ##        ");
 }
 
 void HouseBuilderA::buildRoofl2()
@@ -36,6 +36,30 @@ void HouseBuilderA::buildWall2()
 {
 	strcpy_s(pHouse->look[5], "#          #");
 }
+
+//===============================================
+void HouseBuilderA::buildWallSmallW1()
+{
+	strcpy_s(pHouse->look[4], "#          #");
+}
+
+void HouseBuilderA::buildWallSmallW2()
+{
+	strcpy_s(pHouse->look[5], "#    ##    #");
+}
+//===============================================
+
+//===============================================
+void HouseBuilderA::buildWallBigW1()
+{
+	strcpy_s(pHouse->look[4], "#    ##    #");
+}
+
+void HouseBuilderA::buildWallBigW2()
+{
+	strcpy_s(pHouse->look[5], "#    ##    #");
+}
+//===============================================
 
 void HouseBuilderA::buildFloor()
 {

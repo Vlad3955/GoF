@@ -7,10 +7,10 @@ class HouseBuilder
 {
 public:
 	virtual void buildFloor() = 0;
-	virtual void buildWall1() = 0;
+	virtual void buildWallSmallW1() = 0;
 	virtual void buildRoofl1() = 0;
 	virtual ~HouseBuilder() {};
 protected:
-	House* pHouse = nullptr;
+	House* pHouse;
 };
 

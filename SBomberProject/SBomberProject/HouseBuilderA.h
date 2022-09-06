@@ -8,13 +8,21 @@ class HouseBuilderA : public HouseBuilder
 {
 public:
 	HouseBuilderA();
-	void buildFloor() override;
-	void buildWall1() override;
+	void buildChimney();
+
+	void buildRoofl2();
 	void buildRoofl1() override;
 	void buildCeil();
+	void buildWall1();
 	void buildWall2();
-	void buildRoofl2();
-	void buildChimney();
+
+	void buildWallSmallW1() override;
+	void buildWallSmallW2();
+	
+	void buildWallBigW1();
+	void buildWallBigW2();
+
+	void buildFloor() override;
 	~HouseBuilderA();
 private:
 	

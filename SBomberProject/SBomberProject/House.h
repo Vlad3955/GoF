@@ -17,7 +17,7 @@ public:
 	friend class HouseBuilderA;
 
 private:
-	static char look[7][14];
+	static char look[7][13];
 	const uint16_t score = 40;
 };
 

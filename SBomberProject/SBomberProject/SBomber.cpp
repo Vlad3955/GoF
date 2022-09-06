@@ -8,6 +8,8 @@
 #include "Ground.h"
 #include "Tank.h"
 #include "House.h"
+#include "HouseBuilderA.h"
+#include "HouseDirector.h"
 
 using namespace std;
 using namespace MyTools;
@@ -297,6 +299,30 @@ void SBomber::ProcessKBHit()
 
     case 'B':
         DropBomb();
+        break;
+
+    case '1':
+        {HouseBuilderA hbA; 
+        HouseDirector hD(hbA);
+        hD.constructWithoutCHimney();}
+        break;
+
+    case '2':
+        {HouseBuilderA hbA;
+        HouseDirector hD(hbA);
+        hD.constructWithCHimney();}
+        break;
+
+    case '3':
+        {HouseBuilderA hbA;
+        HouseDirector hD(hbA);
+        hD.constructSmallWindow();}
+        break;
+
+    case '4':
+        {HouseBuilderA hbA;
+        HouseDirector hD(hbA);
+        hD.constructBigWindow();}
         break;
 
     default:
