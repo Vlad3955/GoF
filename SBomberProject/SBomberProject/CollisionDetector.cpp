@@ -1,28 +1,23 @@
 #include "CollisionDetector.h"
 
 
-CollisionDetector::CollisionDetector(Bomb* pBomb, Plane* pPlane, LevelGUI* pLevelGUI, Ground* pGround, 
-    std::vector<Bomb*>& vecBomb, std::vector<DestroyableGroundObject*>& vecDestoyableObjects, bool flag) //:
-    //_pBomb(pBomb), _pPlane(pPlane), _pLevelGUI(pLevelGUI), _pGround(pGround), _vecBomb(vecBomb),
-   //_vecDestoyableObjects(vecDestoyableObjects), _flag(flag)
-{
-    CheckPlaneAndLevelGUI(pPlane, pLevelGUI, flag);
-    CheckBombsAndGround(vecBomb, pGround, vecDestoyableObjects);
-    CheckDestoyableObjects(pBomb, vecDestoyableObjects);
-}
+CollisionDetector::CollisionDetector() : 
+    _pBomb(nullptr), _pPlane(nullptr), _pLevelGUI(nullptr), _pGround(nullptr), _score(0) {};
 
-void CollisionDetector::CheckPlaneAndLevelGUI(Plane* pPlane, LevelGUI* pLevelGUI, bool flag)
+bool CollisionDetector::CheckPlaneAndLevelGUI(Plane* pPlane, LevelGUI* pLevelGUI)
 {
     _pPlane = pPlane;
     _pLevelGUI = pLevelGUI;
-    _flag = flag;
     if (_pPlane->GetX() > _pLevelGUI->GetFinishX())
     {
-        _flag = true;
+        return true;
     }
+    return false;
 }
 
-void CollisionDetector::CheckBombsAndGround(std::vector<Bomb*>& vecBomb, Ground* pGround, std::vector<DestroyableGroundObject*>& vecDestoyableObjects)
+
+Bomb* CollisionDetector::CheckBombsAndGround(const std::vector<Bomb*>& vecBomb, Ground* pGround, 
+    const std::vector<DestroyableGroundObject*>& vecDestoyableObjects, int16_t &score)
 {
     _vecBomb = vecBomb;
     _pGround = pGround;
@@ -32,15 +27,17 @@ void CollisionDetector::CheckBombsAndGround(std::vector<Bomb*>& vecBomb, Ground*
         if (_vecBomb[i]->GetY() >= y) // Пересечение бомбы с землей
         {
             pGround->AddCrater(_vecBomb[i]->GetX());
-            CheckDestoyableObjects(_vecBomb[i], vecDestoyableObjects);
-            DeleteDynamicObj(vecBombs[i]);
+            CheckDestoyableObjects(_vecBomb[i], vecDestoyableObjects, score);
+            return _vecBomb[i];
         }
     }
-
+    return nullptr;
 }
 
-void CollisionDetector::CheckDestoyableObjects(Bomb* pBomb, std::vector<DestroyableGroundObject*>& vecDestoyableObjects)
+DestroyableGroundObject* CollisionDetector::CheckDestoyableObjects(Bomb* pBomb, 
+    const std::vector<DestroyableGroundObject*>& vecDestoyableObjects, int16_t &score)
 {
+    _score = score;
     _pBomb = pBomb;
     _vecDestoyableObjects = vecDestoyableObjects;
     const double size = _pBomb->GetWidth();
@@ -51,12 +48,11 @@ void CollisionDetector::CheckDestoyableObjects(Bomb* pBomb, std::vector<Destroya
         const double x2 = x1 + size;
         if (_vecDestoyableObjects[i]->isInside(x1, x2))
         {
-            score += _vecDestoyableObjects[i]->GetScore();
-            DeleteStaticObj(_vecDestoyableObjects[i]);
+            _score += _vecDestoyableObjects[i]->GetScore();
+            return _vecDestoyableObjects[i];
         }
     }
+    return nullptr;
 }
 
-CollisionDetector::~CollisionDetector()
-{
-}
+CollisionDetector::~CollisionDetector() {}
