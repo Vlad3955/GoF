@@ -1,4 +1,15 @@
-﻿  CollisionDetector.cpp
+﻿  Bomb.cpp
+  CollisionDetector.cpp
+  Ground.cpp
+  House.cpp
+  HouseBuilderA.cpp
+  HouseDirector.cpp
+  LevelGUI.cpp
+  MyTools.cpp
+  Plane.cpp
   SBomber.cpp
+  SBomberProject.cpp
+  Tank.cpp
   Создание кода...
-  SBomberProject.vcxproj -> D:\GB\CPP\GoF\SBomberProject\x64\Debug\SBomberProject.exe
+  LINK : не найден или не выполнена сборка D:\C++\CPP\GoF\SBomberProject\x64\Debug\SBomberProject.exe при последней инкрементной компоновке; выполняется полная компоновка
+  SBomberProject.vcxproj -> D:\C++\CPP\GoF\SBomberProject\x64\Debug\SBomberProject.exe
