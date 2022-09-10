@@ -1,12 +1,20 @@
 #pragma once
+#include <iostream>
 #include "Visitor.h"
-class LogVisitor :
-    public Visitor
+#include <string>
+#include "MyTools.h"
+#include "Bomb.h"
+#include "Plane.h"
+
+
+class LogVisitor : public Visitor
 {
 public:
-	void log(Bomb* pBomb) override;
-	void log(const Plane* pPlane) override;
+	LogVisitor();
+
+	virtual void log(Bomb* pBomb) override;
+	virtual void log(Plane* pPlane) override;
+	~LogVisitor();
 private:
 
 };
-

@@ -7,6 +7,8 @@
 #include "Bomb.h"
 #include "Ground.h"
 #include "Tank.h"
+#include "LogVisitor.h"
+
 
 class SBomber
 {
@@ -47,6 +49,7 @@ private:
     
     bool exitFlag;
 
+    LogVisitor lVisitor;
     uint64_t startTime, finishTime, passedTime;
     uint16_t bombsNumber, deltaTime, fps;
     int16_t score;

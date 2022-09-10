@@ -8,11 +8,15 @@
 using namespace std;
 using namespace MyTools;
 
-void __fastcall Bomb::Accept(const Visitor& v)
+void Bomb::Accept(Visitor& v)
 {
-    v.log(*this);
+    v.log(this);
 }
 
+void Bomb::addObserver(DestroyableGroundObject* obs)
+{
+    _observers.push_back(obs);
+}
 
 void Bomb::Draw() const
 {

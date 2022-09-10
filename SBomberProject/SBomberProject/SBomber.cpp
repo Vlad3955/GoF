@@ -100,6 +100,7 @@ void SBomber::MoveObjects()
     {
         if (vecDynamicObj[i] != nullptr)
         {
+            vecDynamicObj[i]->Accept(lVisitor);
             vecDynamicObj[i]->Move(deltaTime);
         }
     }
