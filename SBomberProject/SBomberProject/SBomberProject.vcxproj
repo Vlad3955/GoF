@@ -140,8 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="CollisionDetector.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="House.cpp" />
+    <ClCompile Include="HouseBuilderA.cpp" />
+    <ClCompile Include="HouseDirector.cpp" />
     <ClCompile Include="LevelGUI.cpp" />
     <ClCompile Include="MyTools.cpp" />
     <ClCompile Include="Plane.cpp" />
@@ -151,11 +154,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bomb.h" />
+    <ClInclude Include="CollisionDetector.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="DynamicObject.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="DestroyableGroundObject.h" />
     <ClInclude Include="House.h" />
+    <ClInclude Include="HouseBuilder.h" />
+    <ClInclude Include="HouseBuilderA.h" />
+    <ClInclude Include="HouseDirector.h" />
     <ClInclude Include="LevelGUI.h" />
     <ClInclude Include="MyTools.h" />
     <ClInclude Include="Plane.h" />
