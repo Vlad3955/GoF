@@ -12,7 +12,8 @@ public:
 	void Accept(Visitor& v) override;
 	void Draw() const override;
 	void addObserver(DestroyableGroundObject* obs);
-	void removeobsrver(DestroyableGroundObject* obs);
+	DestroyableGroundObject* CheckDestoyableObjects();
+	void RemoveObsrver(DestroyableGroundObject* obs);
 
 private:
 	std::vector<DestroyableGroundObject*> _observers;

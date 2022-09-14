@@ -12,6 +12,8 @@ public:
 
 	inline uint16_t GetScore() const override { return score; }
 
+	bool HandleInsideCheck(double x1, double x2);
+
 	void Draw() const override;
 
 private:

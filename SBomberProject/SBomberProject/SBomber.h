@@ -49,6 +49,7 @@ private:
     
     bool exitFlag;
 
+    Bomb bomb;
     LogVisitor lVisitor;
     uint64_t startTime, finishTime, passedTime;
     uint16_t bombsNumber, deltaTime, fps;

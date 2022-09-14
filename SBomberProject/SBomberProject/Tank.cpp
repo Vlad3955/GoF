@@ -30,6 +30,11 @@ bool Tank::isInside(double x1, double x2) const
 	return false;
 }
 
+bool Tank::HandleInsideCheck(double x1, double x2)
+{
+	return isInside(x1, x2);
+}
+
 void Tank::Draw() const
 {
 	MyTools::SetColor(CC_Brown);
