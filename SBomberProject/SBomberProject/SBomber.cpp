@@ -52,19 +52,20 @@ SBomber::SBomber()
     pTank->SetWidth(13);
     pTank->SetPos(30, groundY - 1);
     vecStaticObj.push_back(pTank);
-    bomb.addObserver(pTank);
+    
+    pBomb->addObserver(pTank);
 
     pTank = new Tank;
     pTank->SetWidth(13);
     pTank->SetPos(50, groundY - 1);
     vecStaticObj.push_back(pTank);
-    bomb.addObserver(pTank);
+    pBomb->addObserver(pTank);
 
     House * pHouse = new House;
     pHouse->SetWidth(13);
     pHouse->SetPos(80, groundY - 1);
     vecStaticObj.push_back(pHouse);
-    bomb.addObserver(pHouse);
+    pBomb->addObserver(pHouse);
 
     /*
     Bomb* pBomb = new Bomb;
@@ -136,10 +137,14 @@ void SBomber::CheckBombsAndGround()
         {
             pGround->AddCrater(vecBombs[i]->GetX());
             //CheckDestoyableObjects(vecBombs[i]);
-            vecBombs[i]->CheckDestoyableObjects();
-            //score += vecBombs[i]->CheckDestoyableObjects()->GetScore();
-            //vecBombs[i]->RemoveObsrver(vecBombs[i]->CheckDestoyableObjects());
-            DeleteStaticObj(vecBombs[i]->CheckDestoyableObjects());
+            //DestroyableGroundObject* res;
+            DestroyableGroundObject* res = vecBombs[i]->CheckDestoyableObjects();
+            if (res)
+            {
+                score += res->GetScore();
+                vecBombs[i]->RemoveObsrver(res);
+                DeleteStaticObj(res);
+            }
             DeleteDynamicObj(vecBombs[i]);
         }
     }
@@ -363,7 +368,7 @@ void SBomber::DropBomb()
         double x = pPlane->GetX() + 4;
         double y = pPlane->GetY() + 2;
 
-        Bomb* pBomb = new Bomb;
+        //Bomb* pBomb = new Bomb;
         pBomb->SetDirection(0.3, 1);
         pBomb->SetSpeed(2);
         pBomb->SetPos(x, y);

@@ -27,8 +27,8 @@ DestroyableGroundObject* Bomb::CheckDestoyableObjects()
     {
         const double x1 = this->GetX() - size_2;
         const double x2 = x1 + size;
-        _observers[i]->HandleInsideCheck(x1, x2);
-        if (_observers[i])
+        
+        if (_observers[i]->HandleInsideCheck(x1, x2))
         {
             return _observers[i];
         }
@@ -38,7 +38,7 @@ DestroyableGroundObject* Bomb::CheckDestoyableObjects()
 
 void Bomb::RemoveObsrver(DestroyableGroundObject* obs)
 {
-    _observers.erase(remove(_observers.begin(), _observers.end(), obs), _observers.end());
+   _observers.erase(remove(_observers.begin(), _observers.end(), obs), _observers.end());
 }
 
 void Bomb::Draw() const
