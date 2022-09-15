@@ -7,6 +7,8 @@
 #include "Bomb.h"
 #include "Ground.h"
 #include "Tank.h"
+#include "LogVisitor.h"
+
 
 class SBomber
 {
@@ -29,7 +31,6 @@ private:
 
     void CheckPlaneAndLevelGUI();
     void CheckBombsAndGround();
-    void __fastcall CheckDestoyableObjects(Bomb* pBomb);
 
     void __fastcall DeleteDynamicObj(DynamicObject * pBomb);
     void __fastcall DeleteStaticObj(GameObject* pObj);
@@ -47,6 +48,7 @@ private:
     
     bool exitFlag;
 
+    LogVisitor lVisitor;
     uint64_t startTime, finishTime, passedTime;
     uint16_t bombsNumber, deltaTime, fps;
     int16_t score;

@@ -30,6 +30,11 @@ bool House::isInside(double x1, double x2) const
 	return false;
 }
 
+bool House::HandleInsideCheck(double x1, double x2)
+{
+	return isInside(x1, x2);
+}
+
 void House::Draw() const
 {
 	MyTools::SetColor(CC_Yellow);
