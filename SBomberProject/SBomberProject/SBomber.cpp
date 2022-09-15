@@ -53,19 +53,18 @@ SBomber::SBomber()
     pTank->SetPos(30, groundY - 1);
     vecStaticObj.push_back(pTank);
     
-    pBomb->addObserver(pTank);
 
     pTank = new Tank;
     pTank->SetWidth(13);
     pTank->SetPos(50, groundY - 1);
     vecStaticObj.push_back(pTank);
-    pBomb->addObserver(pTank);
+    
 
     House * pHouse = new House;
     pHouse->SetWidth(13);
     pHouse->SetPos(80, groundY - 1);
     vecStaticObj.push_back(pHouse);
-    pBomb->addObserver(pHouse);
+    
 
     /*
     Bomb* pBomb = new Bomb;
@@ -136,37 +135,19 @@ void SBomber::CheckBombsAndGround()
         if (vecBombs[i]->GetY() >= y) // Пересечение бомбы с землей
         {
             pGround->AddCrater(vecBombs[i]->GetX());
-            //CheckDestoyableObjects(vecBombs[i]);
-            //DestroyableGroundObject* res;
             DestroyableGroundObject* res = vecBombs[i]->CheckDestoyableObjects();
             if (res)
             {
                 score += res->GetScore();
-                vecBombs[i]->RemoveObsrver(res);
+                //vecBombs[i]->RemoveObsrver(res);
                 DeleteStaticObj(res);
             }
             DeleteDynamicObj(vecBombs[i]);
         }
     }
-
+    
 }
 
-//void SBomber::CheckDestoyableObjects(Bomb * pBomb)
-//{
-//    vector<DestroyableGroundObject*> vecDestoyableObjects = FindDestoyableGroundObjects();
-//    const double size = pBomb->GetWidth();
-//    const double size_2 = size / 2;
-//    for (size_t i = 0; i < vecDestoyableObjects.size(); i++)
-//    {
-//        const double x1 = pBomb->GetX() - size_2;
-//        const double x2 = x1 + size;
-//        if (vecDestoyableObjects[i]->isInside(x1, x2))
-//        {
-//            score += vecDestoyableObjects[i]->GetScore();
-//            DeleteStaticObj(vecDestoyableObjects[i]);
-//        }
-//    }
-//}
 
 void SBomber::DeleteDynamicObj(DynamicObject* pObj)
 {
@@ -183,6 +164,12 @@ void SBomber::DeleteDynamicObj(DynamicObject* pObj)
 
 void SBomber::DeleteStaticObj(GameObject* pObj)
 {
+    vector<Bomb*> vecBombs = FindAllBombs();
+    for (auto& it : vecBombs)
+    {
+        it->RemoveObsrver(dynamic_cast<DestroyableGroundObject*>(pObj));
+    }
+
     auto it = vecStaticObj.begin();
     for (; it != vecStaticObj.end(); it++)
     {
@@ -364,11 +351,19 @@ void SBomber::DropBomb()
     {
         WriteToLog(string(__FUNCTION__) + " was invoked");
 
+        vector<DestroyableGroundObject*> vecDestoyableObjects = FindDestoyableGroundObjects();
+
         Plane* pPlane = FindPlane();
         double x = pPlane->GetX() + 4;
         double y = pPlane->GetY() + 2;
 
-        //Bomb* pBomb = new Bomb;
+        Bomb* pBomb = new Bomb;
+
+        for (auto& it : vecDestoyableObjects)
+        {
+            pBomb->addObserver(it);
+        }
+
         pBomb->SetDirection(0.3, 1);
         pBomb->SetSpeed(2);
         pBomb->SetPos(x, y);

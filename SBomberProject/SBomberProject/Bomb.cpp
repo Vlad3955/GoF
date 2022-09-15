@@ -8,6 +8,8 @@
 using namespace std;
 using namespace MyTools;
 
+
+
 void Bomb::Accept(Visitor& v)
 {
     v.log(this);

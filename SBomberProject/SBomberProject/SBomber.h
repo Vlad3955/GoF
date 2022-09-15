@@ -31,7 +31,6 @@ private:
 
     void CheckPlaneAndLevelGUI();
     void CheckBombsAndGround();
-    void __fastcall CheckDestoyableObjects(Bomb* pBomb);
 
     void __fastcall DeleteDynamicObj(DynamicObject * pBomb);
     void __fastcall DeleteStaticObj(GameObject* pObj);
@@ -49,8 +48,6 @@ private:
     
     bool exitFlag;
 
-   //Bomb bomb;
-    Bomb* pBomb = new Bomb;
     LogVisitor lVisitor;
     uint64_t startTime, finishTime, passedTime;
     uint16_t bombsNumber, deltaTime, fps;
