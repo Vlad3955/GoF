@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-
+#include <queue>
 #include "GameObject.h"
 
 class LevelGUI : public GameObject {
@@ -20,6 +20,7 @@ public:
 
 private:
 
+    queue<std::string> _receiveMessage;
     uint16_t height;
     uint16_t finishX = 109;
 

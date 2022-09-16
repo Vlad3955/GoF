@@ -7,6 +7,8 @@
 using namespace std;
 using namespace MyTools;
 
+Mediator* Tank::med;
+
 bool Tank::isInside(double x1, double x2) const
 {
 	const double XBeg = x + 2;
