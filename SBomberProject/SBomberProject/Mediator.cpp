@@ -4,9 +4,9 @@ Mediator::Mediator()
 {
 }
 
-void Mediator::queueMessage(std::string mes)
+void Mediator::queueMessage(std::string& mes)
 {
-
+	_mes.push(mes);
 }
 
 Mediator::~Mediator()

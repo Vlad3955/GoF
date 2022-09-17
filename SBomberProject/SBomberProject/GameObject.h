@@ -17,6 +17,7 @@ public:
 
 protected:
 
+    queue<std::string> _receiveMessage;
     double x, y;
     uint16_t width;
 };

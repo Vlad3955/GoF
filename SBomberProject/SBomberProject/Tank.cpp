@@ -34,6 +34,33 @@ bool Tank::isInside(double x1, double x2) const
 
 void Tank::Draw() const
 {
+	srand(time(NULL));
+
+	int x = 1 + rand() % 4;
+	std::string mes;
+
+	switch (x)
+	{
+	case 1:
+	    mes = "111111";
+	    med->queueMessage(mes);
+	break;
+	case 2:
+	    mes = "2222222";
+	    med->queueMessage(mes);
+	break;
+	case 3:
+		mes = "33333333";
+		med->queueMessage(mes);
+	break;
+	case 4:
+		mes = "444444444";
+		med->queueMessage(mes);
+	break;
+	default:
+		break;
+	}
+
 	MyTools::SetColor(CC_Brown);
 	GotoXY(x, y - 3);
 	cout << "    #####";

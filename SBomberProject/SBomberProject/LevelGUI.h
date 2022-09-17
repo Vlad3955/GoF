@@ -20,7 +20,7 @@ public:
 
 private:
 
-    queue<std::string> _receiveMessage;
+    
     uint16_t height;
     uint16_t finishX = 109;
 

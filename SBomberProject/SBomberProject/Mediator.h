@@ -10,7 +10,7 @@ class Mediator
 {
 public:
 	Mediator();
-	void queueMessage(std::string mes);
+	void queueMessage(std::string& mes);
 	~Mediator();
 private:
 	std::queue<std::string> _mes;
