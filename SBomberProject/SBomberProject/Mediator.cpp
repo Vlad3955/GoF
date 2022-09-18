@@ -1,12 +1,25 @@
 #include "Mediator.h"
 
-Mediator::Mediator()
+Mediator::Mediator() : lev(nullptr)
 {
+	
+}
+
+void Mediator::AddColeague(LevelGUI* lGUI)
+{
+	lev = lGUI;
+
+	//lguiVec.push_back(lGUI);
 }
 
 void Mediator::queueMessage(std::string& mes)
 {
-	_mes.push(mes);
+	lev->BeNotified(mes);
+
+	/*for (auto& it : lguiVec)
+	{
+		it->BeNotified(mes);
+	}*/
 }
 
 Mediator::~Mediator()

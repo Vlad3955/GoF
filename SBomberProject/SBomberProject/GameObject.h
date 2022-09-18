@@ -1,4 +1,10 @@
 #pragma once
+#include <queue>
+#include <string>
+//#include "Mediator.h"
+
+class Mediator;
+
 
 class GameObject {
 public:
@@ -15,9 +21,10 @@ public:
     inline void SetWidth(uint16_t widthN) { width = widthN; }
     inline uint16_t GetWidth() const { return width; }
 
-protected:
+    static Mediator med;
 
-    queue<std::string> _receiveMessage;
+protected:
+    
     double x, y;
     uint16_t width;
 };

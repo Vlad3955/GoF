@@ -1,1 +1,21 @@
-﻿
+﻿  Bomb.cpp
+  Ground.cpp
+  House.cpp
+  LevelGUI.cpp
+D:\C++\CPP\GoF\SBomberProject\SBomberProject\LevelGUI.h(12,13): error C2027: использование неопределенного типа "Mediator"
+D:\C++\CPP\GoF\SBomberProject\SBomberProject\GameObject.h(6): message : см. объявление "Mediator"
+  Mediator.cpp
+D:\C++\CPP\GoF\SBomberProject\SBomberProject\LevelGUI.h(12,13): error C2027: использование неопределенного типа "Mediator"
+D:\C++\CPP\GoF\SBomberProject\SBomberProject\GameObject.h(6): message : см. объявление "Mediator"
+  Plane.cpp
+  SBomber.cpp
+D:\C++\CPP\GoF\SBomberProject\SBomberProject\LevelGUI.h(12,13): error C2027: использование неопределенного типа "Mediator"
+D:\C++\CPP\GoF\SBomberProject\SBomberProject\GameObject.h(6): message : см. объявление "Mediator"
+  SBomberProject.cpp
+D:\C++\CPP\GoF\SBomberProject\SBomberProject\LevelGUI.h(12,13): error C2027: использование неопределенного типа "Mediator"
+D:\C++\CPP\GoF\SBomberProject\SBomberProject\GameObject.h(6): message : см. объявление "Mediator"
+  Tank.cpp
+D:\C++\CPP\GoF\SBomberProject\SBomberProject\LevelGUI.h(12,13): error C2027: использование неопределенного типа "Mediator"
+D:\C++\CPP\GoF\SBomberProject\SBomberProject\GameObject.h(6): message : см. объявление "Mediator"
+D:\C++\CPP\GoF\SBomberProject\SBomberProject\Tank.cpp(45,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Создание кода...

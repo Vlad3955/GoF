@@ -41,6 +41,8 @@ SBomber::SBomber()
     pGUI->SetHeight(maxY - 4);
     pGUI->SetFinishX(offset + width - 4);
     vecStaticObj.push_back(pGUI);
+   /* Tank* pTank = new Tank;
+    pTank->med->AddColeague(pGUI);*/
 
     Ground* pGr = new Ground;
     const uint16_t groundY = maxY - 5;

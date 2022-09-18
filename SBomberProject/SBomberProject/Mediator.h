@@ -1,19 +1,22 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <vector>
 #include <queue>
-#include "Tank.h"
+#include "LevelGUI.h"
 
-class Tank;
 
 class Mediator
 {
 public:
 	Mediator();
 	void queueMessage(std::string& mes);
+	void AddColeague(LevelGUI* lGUI);
 	~Mediator();
 private:
-	std::queue<std::string> _mes;
+	LevelGUI* lev;
+
+	//std::vector<LevelGUI*> lguiVec;
 };
 
 

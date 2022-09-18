@@ -7,7 +7,15 @@
 using namespace std;
 using namespace MyTools;
 
-Mediator* Tank::med;
+
+//Mediator* Tank::med;
+
+
+
+void Tank::BeNotified(std::string& mes) const
+{
+	med.queueMessage(mes);
+}
 
 bool Tank::isInside(double x1, double x2) const
 {
@@ -43,19 +51,19 @@ void Tank::Draw() const
 	{
 	case 1:
 	    mes = "111111";
-	    med->queueMessage(mes);
+	    BeNotified(mes);
 	break;
 	case 2:
 	    mes = "2222222";
-	    med->queueMessage(mes);
+		BeNotified(mes);
 	break;
 	case 3:
 		mes = "33333333";
-		med->queueMessage(mes);
+		BeNotified(mes);
 	break;
 	case 4:
-		mes = "444444444";
-		med->queueMessage(mes);
+		mes = "44444444";
+		BeNotified(mes);
 	break;
 	default:
 		break;

@@ -1,13 +1,15 @@
 #pragma once
 
 #include <stdint.h>
-#include <queue>
+//#include "Mediator.h"
 #include "GameObject.h"
+
+//class Mediator;
 
 class LevelGUI : public GameObject {
 public:
 
-    LevelGUI() : bombsNumber(0), score(0), passedTime(0), fps(0), height(0) { }
+    LevelGUI() : bombsNumber(0), score(0), passedTime(0), fps(0), height(0) {  med.AddColeague(this); }
 
     void __fastcall SetParam(uint64_t passedTimeNew, uint64_t fpsNew, uint16_t bombsNumberNew, int16_t scoreNew);
     
@@ -15,12 +17,12 @@ public:
     
     inline uint16_t GetFinishX() const { return finishX; }
     inline void SetFinishX(uint16_t finishXN) { finishX = finishXN; }
-
+    void BeNotified(std::string& mes) const { _receiveMessage.push(mes); }
     void Draw() const override;
 
 private:
-
     
+    mutable std::queue<std::string> _receiveMessage;
     uint16_t height;
     uint16_t finishX = 109;
 
