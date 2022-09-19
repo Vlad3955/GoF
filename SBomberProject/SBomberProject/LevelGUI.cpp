@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <Windows.h>
 #include "LevelGUI.h"
 #include "MyTools.h"
 
@@ -41,7 +42,7 @@ void LevelGUI::Draw() const
     cout << "BombsNum: " << bombsNumber;
     GotoXY(62, 1);
     cout << "Score: " << score;
-    GotoXY(3, 3);
+    GotoXY(5, 25);
     if (!(_receiveMessage.empty()))
     {
         cout << _receiveMessage.front();

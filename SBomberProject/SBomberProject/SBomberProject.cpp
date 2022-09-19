@@ -1,6 +1,7 @@
 ﻿
 #include <conio.h>
 
+#include <Windows.h>
 #include "SBomber.h"
 #include "MyTools.h"
 
@@ -11,7 +12,7 @@ using namespace std;
 int main(void)
 {
     MyTools::OpenLogFile("log.txt");
-
+    
     SBomber game;
 
     do {
@@ -27,7 +28,7 @@ int main(void)
         game.DrawFrame();
         game.MoveObjects();
         game.CheckObjects();
-
+        Sleep(30);
         game.TimeFinish();
 
     } while (!game.GetExitFlag());

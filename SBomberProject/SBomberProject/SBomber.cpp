@@ -12,6 +12,8 @@
 using namespace std;
 using namespace MyTools;
 
+//class Mediator;
+
 SBomber::SBomber()
     : exitFlag(false),
     startTime(0),
@@ -41,8 +43,9 @@ SBomber::SBomber()
     pGUI->SetHeight(maxY - 4);
     pGUI->SetFinishX(offset + width - 4);
     vecStaticObj.push_back(pGUI);
-   /* Tank* pTank = new Tank;
-    pTank->med->AddColeague(pGUI);*/
+    Mediator* med = new Mediator;
+    Tank* pTank = new Tank(med);
+    pTank->_med->AddColeague(pGUI);
 
     Ground* pGr = new Ground;
     const uint16_t groundY = maxY - 5;
@@ -50,7 +53,7 @@ SBomber::SBomber()
     pGr->SetWidth(width - 2);
     vecStaticObj.push_back(pGr);
 
-    Tank* pTank = new Tank;
+    //Tank* pTank = new Tank;
     pTank->SetWidth(13);
     pTank->SetPos(30, groundY - 1);
     vecStaticObj.push_back(pTank);

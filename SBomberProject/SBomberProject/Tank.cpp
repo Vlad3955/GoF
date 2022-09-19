@@ -1,20 +1,16 @@
 
 #include <iostream>
-
 #include "Tank.h"
 #include "MyTools.h"
 
 using namespace std;
 using namespace MyTools;
 
-
-//Mediator* Tank::med;
-
-
+Mediator* Tank::_med;
 
 void Tank::BeNotified(std::string& mes) const
 {
-	med.queueMessage(mes);
+	_med->queueMessage(mes);
 }
 
 bool Tank::isInside(double x1, double x2) const
@@ -42,33 +38,6 @@ bool Tank::isInside(double x1, double x2) const
 
 void Tank::Draw() const
 {
-	srand(time(NULL));
-
-	int x = 1 + rand() % 4;
-	std::string mes;
-
-	switch (x)
-	{
-	case 1:
-	    mes = "111111";
-	    BeNotified(mes);
-	break;
-	case 2:
-	    mes = "2222222";
-		BeNotified(mes);
-	break;
-	case 3:
-		mes = "33333333";
-		BeNotified(mes);
-	break;
-	case 4:
-		mes = "44444444";
-		BeNotified(mes);
-	break;
-	default:
-		break;
-	}
-
 	MyTools::SetColor(CC_Brown);
 	GotoXY(x, y - 3);
 	cout << "    #####";
@@ -78,4 +47,31 @@ void Tank::Draw() const
 	cout << "    #####";
 	GotoXY(x,y);
 	cout << " ###########";
+
+	srand(time(NULL));
+
+	int x = 1 + rand() % 4;
+	std::string mes;
+
+	switch (x)
+	{
+	case 1:
+		mes = "111111";
+		BeNotified(mes);
+		break;
+	case 2:
+		mes = "2222222";
+		BeNotified(mes);
+		break;
+	case 3:
+		mes = "33333333";
+		BeNotified(mes);
+		break;
+	case 4:
+		mes = "4444444";
+		BeNotified(mes);
+		break;
+	default:
+		break;
+	}
 }
