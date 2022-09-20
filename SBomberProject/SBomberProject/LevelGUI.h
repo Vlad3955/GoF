@@ -20,7 +20,7 @@ public:
     void Draw() const override;
     
 private:
-    
+    static int count;
     mutable std::queue<std::string> _receiveMessage;
     uint16_t height;
     uint16_t finishX = 109;

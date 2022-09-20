@@ -23,7 +23,7 @@ public:
     static Mediator* _med;
 	
 private:
-	
+	static int count;
 	const uint16_t score = 30;
 };
 

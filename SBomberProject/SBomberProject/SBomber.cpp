@@ -8,6 +8,8 @@
 #include "Ground.h"
 #include "Tank.h"
 #include "House.h"
+#include "ColorPlane.h"
+#include "BigPlane.h"
 
 using namespace std;
 using namespace MyTools;
@@ -26,12 +28,31 @@ SBomber::SBomber()
 {
     WriteToLog(string(__FUNCTION__) + " was invoked");
 
-    Plane* p = new Plane;
+    srand(time(NULL));
+
+    int x = 1 + rand() % 2;
+
+    switch (x)
+    {
+    case 1:
+    {BigPlane* p = new BigPlane;
     p->SetDirection(1, 0.1);
     p->SetSpeed(4);
     p->SetPos(5, 10);
-    vecDynamicObj.push_back(p);
+    vecDynamicObj.push_back(p); }
+        break;
+    case 2:
+    {ColorPlane* p = new ColorPlane;
+    p->SetDirection(1, 0.1);
+    p->SetSpeed(4);
+    p->SetPos(5, 10);
+    vecDynamicObj.push_back(p); }
+        break;
+    default:
+        break;
+    }
 
+    
     LevelGUI* pGUI = new LevelGUI;
     pGUI->SetParam(passedTime, fps, bombsNumber, score);
     const uint16_t maxX = GetMaxX();
@@ -53,7 +74,6 @@ SBomber::SBomber()
     pGr->SetWidth(width - 2);
     vecStaticObj.push_back(pGr);
 
-    //Tank* pTank = new Tank;
     pTank->SetWidth(13);
     pTank->SetPos(30, groundY - 1);
     vecStaticObj.push_back(pTank);
