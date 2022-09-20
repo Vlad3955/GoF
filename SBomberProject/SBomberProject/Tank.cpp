@@ -1,11 +1,18 @@
 
 #include <iostream>
-
 #include "Tank.h"
 #include "MyTools.h"
 
 using namespace std;
 using namespace MyTools;
+
+Mediator* Tank::_med;
+int Tank::count = 0;
+
+void Tank::BeNotified(std::string& mes) const
+{
+	_med->queueMessage(mes);
+}
 
 bool Tank::isInside(double x1, double x2) const
 {
@@ -41,4 +48,40 @@ void Tank::Draw() const
 	cout << "    #####";
 	GotoXY(x,y);
 	cout << " ###########";
+
+	srand(time(NULL));
+
+	count++;
+
+
+	if (count >= 80)
+	{
+		int x = 1 + rand() % 4;
+		std::string mes;
+
+		switch (x)
+		{
+		case 1:
+			mes = "- Fuck you!!!";
+			BeNotified(mes);
+			break;
+		case 2:
+			mes = "-I'm gonna kick your ass!!!";
+			BeNotified(mes);
+			break;
+		case 3:
+			mes = "-See you in hell!!!";
+			BeNotified(mes);
+			break;
+		case 4:
+			mes = "-Sucker!!!";
+			BeNotified(mes);
+			break;
+		default:
+			break;
+		}
+		count = 0;
+	}
+
+	
 }

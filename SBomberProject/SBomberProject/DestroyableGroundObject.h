@@ -4,6 +4,8 @@
 
 #include "GameObject.h"
 
+
+
 class DestroyableGroundObject : public GameObject
 {
 public:
@@ -13,5 +15,5 @@ public:
     virtual inline uint16_t GetScore() const = 0;
 
 protected:
-
+    
 };

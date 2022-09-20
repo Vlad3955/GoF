@@ -1,10 +1,13 @@
 #include <iostream>
-
+#include <string>
+#include <Windows.h>
 #include "LevelGUI.h"
 #include "MyTools.h"
 
 using namespace std;
 using namespace MyTools;
+
+int LevelGUI::count = 0;
 
 void LevelGUI::Draw() const
 {
@@ -32,6 +35,8 @@ void LevelGUI::Draw() const
         cout << "+";
     }
 
+    count++;
+
     GotoXY(3, 1);
     cout << "FramePerSecond: " << static_cast<int>(fps / (passedTime / 1000.0));
     GotoXY(25, 1);
@@ -40,6 +45,26 @@ void LevelGUI::Draw() const
     cout << "BombsNum: " << bombsNumber;
     GotoXY(62, 1);
     cout << "Score: " << score;
+    GotoXY(5, 25);
+    if (!(_receiveMessage.empty()) && count >= 50)
+    {
+        cout << _receiveMessage.front();
+        
+    }
+
+    if (!(_receiveMessage.empty()) && count >= 80)
+    {
+        _receiveMessage.pop();
+        count = 0;
+    }
+    
+
+    /*if (!(_receiveMessage.empty()))
+    {
+        cout << _receiveMessage.front();
+        _receiveMessage.pop();
+        count = 0;
+    }*/
 }
 
 void __fastcall LevelGUI::SetParam(uint64_t passedTimeNew, uint64_t fpsNew, uint16_t bombsNumberNew, int16_t scoreNew)
