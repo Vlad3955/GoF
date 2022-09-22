@@ -14,6 +14,7 @@
 
 using namespace std;
 
+
 namespace MyTools {
 
     ofstream logOut;
@@ -70,18 +71,6 @@ namespace MyTools {
 
     //=============================================================================================
 
-    void __fastcall OpenLogFile(const string& FN)
-    {
-        logOut.open(FN, ios_base::out);
-    }
-
-    void CloseLogFile()
-    {
-        if (logOut.is_open())
-        {
-            logOut.close();
-        }
-    }
 
     string GetCurDateTime()
     {
@@ -93,7 +82,13 @@ namespace MyTools {
         return string(buf);
     }
 
-    void __fastcall WriteToLog(const string& str)
+    FileLogger::FileLogger()
+    {
+        logOut.open("log.txt", ios_base::out);
+    }
+
+
+    void __fastcall FileLogger::WriteToLog(const string& str)
     {
         if (logOut.is_open())
         {
@@ -101,7 +96,7 @@ namespace MyTools {
         }
     }
 
-    void __fastcall WriteToLog(const string& str, int n)
+    void __fastcall FileLogger::WriteToLog(const string& str, int n)
     {
         if (logOut.is_open())
         {
@@ -109,13 +104,23 @@ namespace MyTools {
         }
     }
 
-    void __fastcall WriteToLog(const string& str, double d)
+    void __fastcall FileLogger::WriteToLog(const string& str, double d)
     {
         if (logOut.is_open())
         {
             logOut << GetCurDateTime() << " - " << str << d << endl;
         }
     }
+
+    FileLogger::~FileLogger()
+    {
+        if (logOut.is_open())
+        {
+            logOut.close();
+        }
+    }
+
+    FileLogger logger;
 
     //=============================================================================================
 
