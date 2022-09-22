@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <string>
 
+
 namespace MyTools {
 
     // Палитра цветов от 0 до 15
@@ -40,15 +41,17 @@ namespace MyTools {
 
 	//=============================================================================================
 
-	void __fastcall OpenLogFile(const std::string& FN);
+	class FileLogger
+	{
+	public:
+		FileLogger();
+		void __fastcall WriteToLog(const std::string& str);
+		void __fastcall WriteToLog(const std::string& str, int n);
+		void __fastcall WriteToLog(const std::string& str, double d);
+		~FileLogger();
+	};
 
-	void CloseLogFile();
-
-	void __fastcall WriteToLog(const std::string& str);
-
-	void __fastcall WriteToLog(const std::string& str, int n);
-
-	void __fastcall WriteToLog(const std::string& str, double d);
+	extern FileLogger logger;
 
 	//=============================================================================================
 
