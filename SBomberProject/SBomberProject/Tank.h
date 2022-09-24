@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-
+#include <memory>
 #include "DestroyableGroundObject.h"
 
 class Tank : public DestroyableGroundObject
@@ -9,6 +9,8 @@ class Tank : public DestroyableGroundObject
 public:
 
 	bool __fastcall isInside(double x1, double x2) const override;
+
+	std::unique_ptr< DestroyableGroundObject> clone() override;
 
 	inline uint16_t GetScore() const override { return score; }
 
