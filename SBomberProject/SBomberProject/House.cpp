@@ -30,6 +30,11 @@ bool House::isInside(double x1, double x2) const
 	return false;
 }
 
+std::unique_ptr<DestroyableGroundObject> House::clone()
+{
+	return std::make_unique<House>(*this);
+}
+
 void House::Draw() const
 {
 	MyTools::SetColor(CC_Yellow);

@@ -30,6 +30,11 @@ bool Tank::isInside(double x1, double x2) const
 	return false;
 }
 
+std::unique_ptr<DestroyableGroundObject> Tank::clone()
+{
+	return std::make_unique<Tank>(*this);
+}
+
 void Tank::Draw() const
 {
 	MyTools::SetColor(CC_Brown);

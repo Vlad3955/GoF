@@ -8,6 +8,7 @@
 #include "Ground.h"
 #include "Tank.h"
 #include "House.h"
+#include <ctime>
 
 using namespace std;
 using namespace MyTools;
@@ -293,6 +294,25 @@ void SBomber::ProcessKBHit()
 
     case 'b':
         DropBomb();
+        {
+            srand(time(NULL));
+            int x = rand() % (FindDestoyableGroundObjects().size() - 1);
+            FindDestoyableGroundObjects().push_back(FindDestoyableGroundObjects()[x]->clone().get());
+            //vector<DestroyableGroundObject*> vecForCloneObjects = FindDestoyableGroundObjects(); 
+            //for (size_t i = 0; i < FindDestoyableGroundObjects().size(); i++)
+            //{
+            //    FindDestoyableGroundObjects().push_back(FindDestoyableGroundObjects()[i]->clone().get());//.get()->SetPos(10, FindGround()->GetY() - 1));
+            //    break;
+            //    /*for (size_t x1 = 1; x1 < 100; x1++)
+            //    {
+            //        size_t x2 = x1 + 13;
+            //        if (!(FindDestoyableGroundObjects()[i]->isInside(x1, x2)))
+            //        {
+            //            FindDestoyableGroundObjects()[i]->clone().get();
+            //        }
+            //    } */
+            //}
+        }
         break;
 
     case 'B':
